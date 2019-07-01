@@ -17,23 +17,16 @@ function createToken(user) {
 function decodeToken (token) {
     const decoded = new Promise((resolve, reject) => {
         try {
-            payload = jwt.decode(token. config.SECRET_TOKEN)
+            let payload = jwt.decode(token, config.SECRET_TOKEN)
             if(payload.exp <= moment().unix()){
-                reject({
-                    status: 401,
-                    message: 'El token ha expirado'
-                })
+                reject(err)
             }
             resolve(payload.sub)
         }
         catch(err) {
-            reject({
-                status: 500,
-                message: 'Invalid Token'
-            })
+            reject(err)
         }
     })
-
     return decoded
 }
 
